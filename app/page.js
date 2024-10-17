@@ -2,7 +2,10 @@
 import Image from "next/image";
 import pink from "./assets/image1.png";
 import Row from "./components/Row";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { DndProvider } from "react-dnd";
+import update from 'immutability-helper';
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const initialRowData = [
   {
@@ -14,7 +17,7 @@ const initialRowData = [
       },
       {
         name: "tag1",
-        status: "active",
+        status: "inactive",
       },
       {
         name: "tag1",
@@ -121,23 +124,43 @@ if(!window.localStorage.getItem("rows")){
 
 export default function Home() {
   const [rows, setRows] = useState(JSON.parse(window.localStorage.getItem("rows")) || []);
+
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    setRows((prevRows) =>
+      update(prevRows, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevRows[dragIndex]],
+        ],
+      }),
+    )
+  }, [])
+
+  const renderCard = useCallback((row, index)=>{
+    return(
+      <Row
+        key={row.id}
+        row={row}
+        index={index}
+        id={row.id}
+        moveCard={moveCard}
+      />
+    )
+  }, [])
+
   return (
     <div className="">
-      <table>
-        <thead>
-        </thead>
-        <tbody>
-          {rows.map((row, index)=>(
-            <Row
-              key={row.id}
-              row={row}
-              index={index}
-              id={row.id}
-              moveCard={moveCard}
-            />
-          ))}
-        </tbody>
-      </table>
+      <DndProvider backend={HTML5Backend}>
+        <table>
+          <thead>
+          </thead>
+          <tbody>
+            {rows.map((row, index)=>(
+              renderCard(row,index)
+            ))}
+          </tbody>
+        </table>
+      </DndProvider>
     </div>
   );
 }
