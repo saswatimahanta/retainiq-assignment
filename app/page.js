@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import pink from "./assets/image1.png";
 import Row from "./components/Row";
+import { useState } from "react";
 
 const initialRowData = [
   {
@@ -113,15 +115,27 @@ const initialRowData = [
   },
 ]
 
+if(!window.localStorage.getItem("rows")){
+  window.localStorage.setItem("rows", JSON.stringify(initialRowData));
+}
+
 export default function Home() {
+  const [rows, setRows] = useState(JSON.parse(window.localStorage.getItem("rows")) || []);
   return (
     <div className="">
       <table>
         <thead>
-          <Row/>
         </thead>
         <tbody>
-
+          {rows.map((row, index)=>(
+            <Row
+              key={row.id}
+              row={row}
+              index={index}
+              id={row.id}
+              moveCard={moveCard}
+            />
+          ))}
         </tbody>
       </table>
     </div>
