@@ -7,6 +7,8 @@ import { DndProvider } from "react-dnd";
 import update from 'immutability-helper';
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"];
+
 const initialRowData = [
   {
     id: 1,
@@ -122,9 +124,13 @@ if(!window.localStorage.getItem("rows")){
   window.localStorage.setItem("rows", JSON.stringify(initialRowData));
 }
 
+if(!window.localStorage.getItem("rowHeaders")){
+  window.localStorage.setItem("rowHeaders", JSON.stringify(initialHeaderRows));
+}
+
 export default function Home() {
   const [rows, setRows] = useState(JSON.parse(window.localStorage.getItem("rows")) || []);
-
+  const [headerRows, setHeaderRows] = useState(JSON.parse(window.localStorage.getItem("rowHeaders")) || [])
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
       update(prevRows, {
@@ -149,10 +155,15 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="">
+    <div className="mt-12 flex w-[80vw] min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] overflow-hidden rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
+            <tr>
+              {headerRows.map((header)=>(
+                <th>{header}</th>
+              ))}
+            </tr>
           </thead>
           <tbody>
             {rows.map((row, index)=>(
