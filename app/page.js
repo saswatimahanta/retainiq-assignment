@@ -142,6 +142,26 @@ export default function Home() {
     )
   }, [])
 
+  const handleAddRows= () => {
+    const newRows = rows.map((row)=>(
+      {
+        ...row,
+        variants: [
+          ...row.variants,
+          {
+            design: "Add design",
+          }
+        ]
+      }
+    ))
+
+    setRows(newRows);
+  }
+
+  useEffect(()=>{
+    window.localStorage.setItem("rows", JSON.stringify(rows))
+  }, [rows])
+
   const renderCard = useCallback((row, index)=>{
     return(
       <Row
@@ -150,6 +170,7 @@ export default function Home() {
         index={index}
         id={row.id}
         moveCard={moveCard}
+        handleAddRows={handleAddRows}
       />
     )
   }, [])
@@ -160,8 +181,8 @@ export default function Home() {
         <table>
           <thead>
             <tr>
-              {headerRows.map((header)=>(
-                <th>{header}</th>
+              {headerRows.map((header, index)=>(
+                <th key={index}>{header}</th>
               ))}
             </tr>
           </thead>

@@ -11,7 +11,8 @@ const Row = ({
     row,
     index,
     id,
-    moveCard
+    moveCard,
+    handleAddRows,
 }) => {
     const ref = useRef(null)
     const [{ handlerId }, drop] = useDrop({
@@ -100,18 +101,30 @@ const Row = ({
 
         {row.variants.map((variant, index)=>(
             <td key={index} className="px-8 border-r-2 border-[#E4E4E4]">
-                <div className="relative bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
-                    <Image src={variant.url} alt="image" height={100}/>
-                    <i className="text-xs">{variant.name}</i>
-                    <div className="absolute top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer">
-                        <FiEdit/>
+                {variant.design? 
+                    <div className="bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex justify-center items-center cursor-pointer">
+                        <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md" >
+                            <IoMdAdd size={23}/>
+                            <p className="text-xs font-bold">{variant.design}</p>
+                        </div>
                     </div>
-                </div>
+                    : 
+                    <div className="relative bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
+                        <Image src={variant.url} alt="image" height={100}/>
+                        <i className="text-xs">{variant.name}</i>
+                        <div className="absolute top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer">
+                            <FiEdit/>
+                        </div>
+                    </div>
+                }
             </td>
         ))}
 
         <td className='px-8'>
-            <div className='p-4 border border-[#E4E4E4] rounded-md bg-white'>
+            <div 
+                className='p-4 border border-[#E4E4E4] rounded-md bg-white cursor-pointer'
+                onClick={handleAddRows}
+            >
                 <IoMdAdd size={23}/>
             </div>
         </td>
