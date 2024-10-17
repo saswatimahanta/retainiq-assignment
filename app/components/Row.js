@@ -109,6 +109,12 @@ const Row = ({
                 </div>
             </td>
         ))}
+
+        <td className='px-8'>
+            <div className='p-4 border border-[#E4E4E4] rounded-md bg-white'>
+                <IoMdAdd size={23}/>
+            </div>
+        </td>
     </tr>
   )
 }
