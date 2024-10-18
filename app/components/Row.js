@@ -12,7 +12,8 @@ const Row = ({
     index,
     id,
     moveCard,
-    handleAddRows,
+    handleAddColumns,
+    handleDeleteRows,
 }) => {
     const ref = useRef(null)
     const [{ handlerId }, drop] = useDrop({
@@ -77,7 +78,9 @@ const Row = ({
     <tr ref={ref} className="h-[13rem] cursor-move">
         <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
           <div className="relative">
-            <div className="absolute top-[-57%] right-[18%] cursor-pointer">
+            <div className="absolute top-[-57%] right-[18%] cursor-pointer"
+              onClick={()=>handleDeleteRows(index)}
+            >
               <RiDeleteBinLine color="crimson" size={23}/>
             </div>
             <div className="flex justify-center items-end">
@@ -123,7 +126,7 @@ const Row = ({
         <td className='px-8'>
             <div 
                 className='h-[58px] w-[58px] border border-[#E4E4E4] rounded-md bg-white cursor-pointer flex justify-center items-center'
-                onClick={handleAddRows}
+                onClick={handleAddColumns}
             >
                 <IoMdAdd size={23}/>
             </div>

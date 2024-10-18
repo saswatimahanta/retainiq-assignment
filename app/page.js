@@ -7,6 +7,7 @@ import { DndProvider } from "react-dnd";
 import update from 'immutability-helper';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Rowx from "./components/Rowx";
+import { IoMdAdd } from "react-icons/io";
 
 const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"];
 
@@ -146,7 +147,7 @@ export default function Home() {
     )
   }, [])
 
-  const handleAddRows= (e) => {
+  const handleAddColumns= (e) => {
     e.stopPropagation();
     setRows((prevRows) =>
     prevRows.map((row) => ({
@@ -154,12 +155,42 @@ export default function Home() {
       variants: [
         ...row.variants,
         {
-          id: row.variants.length + 1,
           design: "Add Design",
         },
       ],
     }))
   );
+  }
+
+  const handleAddRows = () => {
+    setRows(prevRows => [
+      ...prevRows,
+      {
+        id: prevRows.length+1,
+        tags: [
+          {
+            name: "tag1",
+            status: "active",
+          },
+          {
+            name: "tag1",
+            status: "inactive",
+          },
+          {
+            name: "tag1",
+            status: "active",
+          }
+        ],
+        variants: prevRows[0].variants.map((variant)=>({
+          design: "Add Design",
+        }))
+      }
+
+    ])
+  }
+
+  const handleDeleteRows= (index) => {
+    setRows(prevRows=>prevRows.filter((row, i)=> index != i));
   }
 
   useEffect(()=>{
@@ -179,19 +210,20 @@ export default function Home() {
         index={index}
         id={row.id}
         moveCard={moveCard}
-        handleAddRows={handleAddRows}
+        handleAddColumns={handleAddColumns}
       />
     )
   }, [])
 
   return (
-    <div className="relative mt-12 flex w-[80vw] max-w-[80vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
+    <>
+    <div className="relative mt-12 w-[80vw] max-w-[80vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
             <tr className="">
               {rowHeaders.map((header, index)=>(
-                <th className={index<2 && 'sticky top-[0] left-[122px] z-2 bg-[#F0F0F2]'} key={index}>{header}</th>
+                <th className={index<2 ? 'sticky top-[0] left-[122px] z-2 bg-[#F0F0F2]': ''} key={index}>{header}</th>
               ))}
             </tr>
           </thead>
@@ -204,12 +236,21 @@ export default function Home() {
                 index={index}
                 id={row.id}
                 moveCard={moveCard}
-                handleAddRows={handleAddRows}
+                handleAddColumns={handleAddColumns}
+                handleDeleteRows={handleDeleteRows}
               />
             ))}
           </tbody>
         </table>
       </DndProvider>
+      <div className="bg-white w-[2.5rem] h-[2.5rem] flex justify-center items-center rounded-md border-[#E4E4E4] cursor-pointer translate-x-[2rem] 
+      translate-y-[3rem] mb-[4rem]" 
+      onClick={handleAddRows}>
+        <IoMdAdd size={25}/>
+      </div>
     </div>
+
+    <div className="m-[10rem]">Use different SKUs</div>
+    </>
   );
 }
