@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
 import pink from "./assets/image1.png";
+import image11 from "./assets/image1.png"
+import image12 from "./assets/image2.png"
+import image21 from "./assets/image3.png"
+import image22 from "./assets/image4.png"
+import image31 from "./assets/image5.png"
 import Row from "./components/Row";
 import { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import update from 'immutability-helper';
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Rowx from "./components/Rowx";
 import { IoMdAdd } from "react-icons/io";
+import DesignModal from "./components/DesignModal";
 
 const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"];
 
@@ -122,6 +127,69 @@ const initialRowData = [
   },
 ]
 
+const designs = [
+  {
+    name: "maroon kurti",
+    url: image11,
+  },
+  {
+    name: "pink kurti",
+    url: image12,
+  },
+  {
+    name: "dark yellow kurti",
+    url: image21,
+  },
+  {
+    name: "light yellow kurti",
+    url: image22,
+  },
+  {
+    name: "white-pink kurti",
+    url: image31,
+  },
+  {
+    name: "maroon kurti",
+    url: image11,
+  },
+  {
+    name: "pink kurti",
+    url: image12,
+  },
+  {
+    name: "dark yellow kurti",
+    url: image21,
+  },
+  {
+    name: "light yellow kurti",
+    url: image22,
+  },
+  {
+    name: "white-pink kurti",
+    url: image31,
+  },
+  {
+    name: "maroon kurti",
+    url: image11,
+  },
+  {
+    name: "pink kurti",
+    url: image12,
+  },
+  {
+    name: "dark yellow kurti",
+    url: image21,
+  },
+  {
+    name: "light yellow kurti",
+    url: image22,
+  },
+  {
+    name: "white-pink kurti",
+    url: image31,
+  }
+]
+
 const initialData = {
   rowHeaders: initialHeaderRows,
   rowData: initialRowData,
@@ -136,6 +204,8 @@ export default function Home() {
   const initialRowHeaders = JSON.parse(window.localStorage.getItem("data")).rowHeaders;
   const [rows, setRows] = useState(initialRowData || []);
   const [rowHeaders, setRowHeaders] = useState(initialRowHeaders || [])
+  const [designModal, setDesignModal] = useState(false);
+
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
       update(prevRows, {
@@ -238,6 +308,7 @@ export default function Home() {
                 moveCard={moveCard}
                 handleAddColumns={handleAddColumns}
                 handleDeleteRows={handleDeleteRows}
+                setDesignModal={setDesignModal}
               />
             ))}
           </tbody>
@@ -249,6 +320,11 @@ export default function Home() {
         <IoMdAdd size={25}/>
       </div>
     </div>
+
+    {designModal && <DesignModal
+      designs={designs}
+      setDesignModal={setDesignModal}
+    />}
 
     <div className="m-[10rem]">Use different SKUs</div>
     </>

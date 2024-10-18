@@ -14,6 +14,7 @@ const Row = ({
     moveCard,
     handleAddColumns,
     handleDeleteRows,
+    setDesignModal,
 }) => {
     const ref = useRef(null)
     const [{ handlerId }, drop] = useDrop({
@@ -74,6 +75,11 @@ const Row = ({
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
 
+    const handleDesignModal = () => {
+      setDesignModal(true);
+      console.log("hey")
+    }
+
   return (
     <tr ref={ref} className="h-[13rem] cursor-move">
         <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
@@ -106,16 +112,18 @@ const Row = ({
             <td key={index} className="px-8 border-r-2 border-[#E4E4E4]">
                 {variant.design? 
                     <div className="bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex justify-center items-center cursor-pointer">
-                        <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md" >
+                        <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md" 
+                          onClick={handleDesignModal}
+                        >
                             <IoMdAdd size={23}/>
                             <p className="text-xs font-bold">{variant.design}</p>
                         </div>
                     </div>
                     : 
-                    <div className="relative bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
+                    <div className="relative z-2 bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
                         <Image src={variant.url} alt="image" height={100}/>
                         <i className="text-xs">{variant.name}</i>
-                        <div className="absolute top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer">
+                        <div className="absolute z-3 top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer">
                             <FiEdit/>
                         </div>
                     </div>
