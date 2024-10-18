@@ -72,7 +72,7 @@ const Row = ({
     })
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
-
+    // console.log(row.variants);
   return (
     <tr ref={ref} className="h-[13rem] cursor-move">
         <td className="px-8 border-r-2 border-[#E4E4E4]">
@@ -100,7 +100,7 @@ const Row = ({
         </td>
 
         {row.variants.map((variant, index)=>(
-            <td key={index} className="px-8 border-r-2 border-[#E4E4E4]">
+            <td className="px-8 border-r-2 border-[#E4E4E4]">
                 {variant.design? 
                     <div className="bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex justify-center items-center cursor-pointer">
                         <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md" >

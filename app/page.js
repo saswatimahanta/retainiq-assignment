@@ -143,19 +143,19 @@ export default function Home() {
   }, [])
 
   const handleAddRows= () => {
-    const newRows = rows.map((row)=>(
-      {
-        ...row,
+    const newRows = rows.map((row)=>{
+      return {
+        ...row, 
         variants: [
           ...row.variants,
           {
-            design: "Add design",
-          }
+            design: "Add Design",
+          },
         ]
       }
-    ))
-
+    })
     setRows(newRows);
+    console.log( rows);
   }
 
   useEffect(()=>{
@@ -176,19 +176,28 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="mt-12 flex w-[80vw] min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] overflow-hidden rounded-md">
+    <div className="mt-12 flex w-[80vw] min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] overflow-scroll rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
             <tr>
               {headerRows.map((header, index)=>(
+
                 <th key={index}>{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {rows.map((row, index)=>(
-              renderCard(row,index)
+              // renderCard(row,index)
+              <Row
+                key={row.id}
+                row={row}
+                index={index}
+                id={row.id}
+                moveCard={moveCard}
+                handleAddRows={handleAddRows}
+              />
             ))}
           </tbody>
         </table>
