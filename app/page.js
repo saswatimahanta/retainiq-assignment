@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import update from 'immutability-helper';
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Rowx from "./components/Rowx";
 
 const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"];
 
@@ -120,17 +121,21 @@ const initialRowData = [
   },
 ]
 
-if(!window.localStorage.getItem("rows")){
-  window.localStorage.setItem("rows", JSON.stringify(initialRowData));
+const initialData = {
+  rowHeaders: initialHeaderRows,
+  rowData: initialRowData,
 }
 
-if(!window.localStorage.getItem("rowHeaders")){
-  window.localStorage.setItem("rowHeaders", JSON.stringify(initialHeaderRows));
+if(!window.localStorage.getItem("data")){
+  window.localStorage.setItem("data", JSON.stringify(initialData));
 }
 
 export default function Home() {
-  const [rows, setRows] = useState(JSON.parse(window.localStorage.getItem("rows")) || []);
-  const [headerRows, setHeaderRows] = useState(JSON.parse(window.localStorage.getItem("rowHeaders")) || [])
+  console.log(JSON.parse(window.localStorage.getItem("data")));
+  const initialRowData = JSON.parse(window.localStorage.getItem("data")).rowData;
+  const initialRowHeaders = JSON.parse(window.localStorage.getItem("data")).rowHeaders;
+  const [rows, setRows] = useState(initialRowData || []);
+  const [rowHeaders, setRowHeaders] = useState(JSON.parse(window.localStorage.getItem("rowHeaders")) || [])
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
       update(prevRows, {
@@ -142,20 +147,21 @@ export default function Home() {
     )
   }, [])
 
-  const handleAddRows= () => {
-    const newRows = rows.map((row)=>{
-      return {
-        ...row, 
-        variants: [
-          ...row.variants,
-          {
-            design: "Add Design",
-          },
-        ]
-      }
-    })
-    setRows(newRows);
-    console.log( rows);
+  const handleAddRows= (e) => {
+    e.stopPropagation();
+    setRows((prevRows) =>
+    prevRows.map((row) => ({
+      ...row,
+      variants: [
+        ...row.variants,
+        {
+          id: row.variants.length + 1,
+          design: "Add Design",
+        },
+      ],
+    }))
+  );
+    // console.log( newRows);
   }
 
   useEffect(()=>{
@@ -176,14 +182,13 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="mt-12 flex w-[80vw] min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] overflow-scroll rounded-md">
+    <div className="mt-12 flex w-[80vw] max-w-[80vw] overflow-x-auto min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
             <tr>
-              {headerRows.map((header, index)=>(
-
-                <th key={index}>{header}</th>
+              {rowHeaders.map((header, index)=>(
+                <th className="" key={index}>{header}</th>
               ))}
             </tr>
           </thead>
