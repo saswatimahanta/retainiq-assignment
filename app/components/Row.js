@@ -75,7 +75,7 @@ const Row = ({
 
   return (
     <tr ref={ref} className="h-[13rem] cursor-move">
-        <td className="px-8 border-r-2 border-[#E4E4E4]">
+        <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
           <div className="relative">
             <div className="absolute top-[-57%] right-[18%] cursor-pointer">
               <RiDeleteBinLine color="crimson" size={23}/>
@@ -88,7 +88,7 @@ const Row = ({
           </div>
         </td>
 
-        <td className="px-8 border-r-2 border-[#E4E4E4]">
+        <td className="sticky top-0 left-[6.7rem] bg-[#F0F0F2] z-20 px-8 border-r-2 border-[#E4E4E4]">
             <div className="flex justify-center items-center gap-2 bg-white h-[9rem] w-[20rem] border border-[#E4E4E4] rounded-md">
             {row.tags.map((tag, index)=>(
                 <div key={index} className={`border px-2 py-1 text-xs rounded-sm font-semibold ${tag.status==="active" ? 

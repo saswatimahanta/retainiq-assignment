@@ -131,11 +131,10 @@ if(!window.localStorage.getItem("data")){
 }
 
 export default function Home() {
-  console.log(JSON.parse(window.localStorage.getItem("data")));
   const initialRowData = JSON.parse(window.localStorage.getItem("data")).rowData;
   const initialRowHeaders = JSON.parse(window.localStorage.getItem("data")).rowHeaders;
   const [rows, setRows] = useState(initialRowData || []);
-  const [rowHeaders, setRowHeaders] = useState(JSON.parse(window.localStorage.getItem("rowHeaders")) || [])
+  const [rowHeaders, setRowHeaders] = useState(initialRowHeaders || [])
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
       update(prevRows, {
@@ -161,12 +160,16 @@ export default function Home() {
       ],
     }))
   );
-    // console.log( newRows);
   }
 
   useEffect(()=>{
-    window.localStorage.setItem("rows", JSON.stringify(rows))
-  }, [rows])
+    const newData = {
+      rowHeaders: rowHeaders,
+      rowData: rows,
+    }
+    console.log(newData);
+    window.localStorage.setItem("data", JSON.stringify(newData));
+  }, [rows, rowHeaders])
 
   const renderCard = useCallback((row, index)=>{
     return(
@@ -182,13 +185,13 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="mt-12 flex w-[80vw] max-w-[80vw] overflow-x-auto min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
+    <div className="relative mt-12 flex w-[80vw] max-w-[80vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
-            <tr>
+            <tr className="">
               {rowHeaders.map((header, index)=>(
-                <th className="" key={index}>{header}</th>
+                <th className={index<2 && 'sticky top-[0] left-[122px] z-2 bg-[#F0F0F2]'} key={index}>{header}</th>
               ))}
             </tr>
           </thead>
