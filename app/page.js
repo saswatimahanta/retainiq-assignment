@@ -13,11 +13,11 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 
 export default function Home() {
-  if(!window.localStorage.getItem("data")){
+  if(typeof window !== "undefined" && !window.localStorage.getItem("data")){
     window.localStorage.setItem("data", JSON.stringify(initialData));
   }
-  const initialRowData = JSON.parse(window.localStorage.getItem("data")).rowData;
-  const initialRowHeaders = JSON.parse(window.localStorage.getItem("data")).rowHeaders;
+  const initialRowData = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("data")).rowData : [];
+  const initialRowHeaders = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("data")).rowHeaders: [];
   const [rows, setRows] = useState(initialRowData || []);
   const [rowHeaders, setRowHeaders] = useState(initialRowHeaders || [])
 
