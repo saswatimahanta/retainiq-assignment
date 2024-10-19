@@ -22,7 +22,7 @@ const initialRowData = [
       {
         name: "tag1",
         status: "active",
-      }
+      },
     ],
     variants: [
       {

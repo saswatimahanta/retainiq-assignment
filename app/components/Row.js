@@ -102,7 +102,7 @@ const Row = ({
       </td>
 
       <td className="sticky top-0 left-[6.7rem] bg-[#F0F0F2] z-20 px-8 border-r-2 border-[#E4E4E4]">
-        <div className="flex justify-center items-center gap-2 bg-white h-[9rem] w-[20rem] border border-[#E4E4E4] rounded-md relative">
+        <div className="flex justify-center items-center gap-2 bg-white min-h-[9rem] w-[20rem] p-[2rem] border border-[#E4E4E4] rounded-md relative flex-wrap">
           {row.tags ? row.tags.map((tag, index) => (
             <div
               key={index}
@@ -122,7 +122,8 @@ const Row = ({
           )}
           {row.tags && (
             <div
-              className="absolute left-[-0.5rem] justify-center items-center gap-2 bg-white h-[6rem] w-[25rem] border border-[#E4E4E4] rounded-md opacity-0 hover:opacity-100 transition-opacity flex"
+              className="absolute left-[-0.5rem] justify-center items-center gap-2 bg-white h-[6rem] min-w-[21rem] p-[2rem] border border-[#E4E4E4] 
+              rounded-md opacity-0 hover:opacity-100 transition-opacity flex shadow-md"
             >
               {row.tags.map((tag, index) => (
                 <div

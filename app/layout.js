@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import {IoImageOutline} from "react-icons/io5";
+import { FaMeta } from "react-icons/fa6";
+import { FaFan } from "react-icons/fa6";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,9 +25,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100vh]`}
       >
-        {children}
+        <div className="h-[5rem] w-[99.1vw] bg-black ">
+        </div>
+        <div className="flex">
+          <div className="w-[5rem] pt-[3rem] bg-black flex flex-col justify-start items-center gap-10">
+            <FaFan size={30} color="green"/>
+            <IoImageOutline size={30} color="white"/>
+            <FaMeta size={30} color="white"/>
+          </div>
+          {children}
+        </div>
       </body>
     </html>
   );

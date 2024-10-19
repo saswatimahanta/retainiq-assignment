@@ -9,6 +9,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { IoMdAdd } from "react-icons/io";
 import DesignModal from "./components/DesignModal";
 import { initialData } from "./constants";
+import { FaArrowLeft } from "react-icons/fa6";
 
 if(!window.localStorage.getItem("data")){
   window.localStorage.setItem("data", JSON.stringify(initialData));
@@ -136,8 +137,15 @@ export default function Home() {
   }, [])
 
   return (
-    <>
-    <div className="relative mt-12 w-[80vw] max-w-[80vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
+    <div>
+    <div className="flex justify-between m-11">
+      <div className="flex text-3xl font-semibold justify-center items-center gap-6">
+        <FaArrowLeft size={25}/>
+        <div className="border-b-2 pl-[0.5rem] w-[19rem]">Rules Creation</div>
+      </div>
+      <button className="p-3 bg-green-700 text-white rounded-md">Publish Feed</button>
+    </div>
+    <div className="relative m-11 w-[90vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
@@ -178,8 +186,6 @@ export default function Home() {
       setDesignModal={setDesignModal}
       setDesign={setDesign}
     />}
-
-    <div className="m-[10rem]">Use different SKUs</div>
-    </>
+    </div>
   );
 }
