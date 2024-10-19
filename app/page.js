@@ -246,20 +246,7 @@ export default function Home() {
       ...prevRows,
       {
         id: prevRows.length+1,
-        tags: [
-          {
-            name: "tag1",
-            status: "active",
-          },
-          {
-            name: "tag1",
-            status: "inactive",
-          },
-          {
-            name: "tag1",
-            status: "active",
-          }
-        ],
+        //new product filters can be added here for new rows
         variants: prevRows[0].variants.map((variant)=>({
           design: "Add Design",
         }))
@@ -352,7 +339,7 @@ export default function Home() {
         </table>
       </DndProvider>
       <div className="bg-white w-[2.5rem] h-[2.5rem] flex justify-center items-center rounded-md border-[#E4E4E4] cursor-pointer translate-x-[2rem] 
-      translate-y-[3rem] mb-[4rem]" 
+      translate-y-[3rem] mb-[4rem] sticky top-0 left-0" 
       onClick={handleAddRows}>
         <IoMdAdd size={25}/>
       </div>
