@@ -2,9 +2,9 @@ import React from 'react';
 import {IoImageOutline} from "react-icons/io5";
 import { FiSearch } from 'react-icons/fi';
 import Image from 'next/image';
+import { designs } from '../constants';
 
 const DesignModal = ({
-    designs,
     setDesignModal,
     setDesign,
 }) => {
