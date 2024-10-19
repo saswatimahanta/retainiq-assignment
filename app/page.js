@@ -33,6 +33,12 @@ export default function Home() {
   //holds the cell where insertion is needed
   const [variantIndex, setVariantIndex] = useState(null);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(()=>{
+    setIsClient(true);
+  }, [])
+
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
       update(prevRows, {
@@ -138,6 +144,7 @@ export default function Home() {
       </div>
       <button className="p-3 bg-green-700 text-white rounded-md">Publish Feed</button>
     </div>
+    {isClient && 
     <div className="relative m-11 w-[90vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
@@ -174,7 +181,7 @@ export default function Home() {
         <IoMdAdd size={25}/>
       </div>
     </div>
-
+    }
     {designModal && <DesignModal
       setDesignModal={setDesignModal}
       setDesign={setDesign}
