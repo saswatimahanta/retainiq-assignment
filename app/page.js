@@ -66,7 +66,7 @@ export default function Home() {
 
   setRowHeaders((prevRowHeaders) => [
     ...prevRowHeaders,
-    `Variant ${prevRowHeaders.length - 2}`,
+    `Variant ${prevRowHeaders.length - 1}`,
   ])
   }
 
@@ -145,13 +145,13 @@ export default function Home() {
       <button className="p-3 bg-green-700 text-white rounded-md">Publish Feed</button>
     </div>
     {isClient && 
-    <div className="relative m-11 w-[90vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 bg-[#F0F0F2] rounded-md">
+    <div className="relative m-11 w-[90vw] overflow-x-auto no-scrollbar min-h-[60vh] border border-[#E4E4E4]-500 p-10 pl-0 bg-[#F0F0F2] rounded-md">
       <DndProvider backend={HTML5Backend}>
         <table>
           <thead>
             <tr className="">
               {rowHeaders.map((header, index)=>(
-                <th className={index==0 ? 'sticky top-[0] left-[2px] pl-[9rem] z-2 bg-[#F0F0F2]': ''} key={index}>{header}</th>
+                <th className={index==0 ? 'sticky top-[0] left-0 pl-[9rem] z-2 bg-[#F0F0F2]': ''} key={index}>{header}</th>
               ))}
             </tr>
           </thead>
@@ -175,7 +175,7 @@ export default function Home() {
           </tbody>
         </table>
       </DndProvider>
-      <div className="bg-white w-[2.5rem] h-[2.5rem] flex justify-center items-center rounded-md border-[#E4E4E4] cursor-pointer translate-x-[2rem] 
+      <div className="bg-white w-[2.5rem] h-[2.5rem] flex justify-center items-center rounded-md border-[#E4E4E4] cursor-pointer translate-x-[5rem] 
       translate-y-[3rem] mb-[4rem] sticky top-0 left-0" 
       onClick={handleAddRows}>
         <IoMdAdd size={25}/>

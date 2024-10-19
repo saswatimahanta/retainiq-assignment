@@ -5,7 +5,7 @@ import image21 from "./assets/image3.png"
 import image22 from "./assets/image4.png"
 import image31 from "./assets/image5.png"
 
-const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"];
+const initialHeaderRows = ["Product Filter", "Primary Variant", "Variant 1"];
 
 const initialRowData = [
   {

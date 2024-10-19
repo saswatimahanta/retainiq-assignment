@@ -85,10 +85,9 @@ const Row = ({
 
   return (
     <tr ref={ref} className="h-[13rem] cursor-move group" onClick={() => setParentIndex(index)}>
-      <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
+      <td className="sticky top-0 left-0 z-20 pr-8 pl-[5rem] bg-[#F0F0F2]">
         <div className='flex items-center gap-10'>
           <div className="relative">
-            {/* Delete button controlled by row hover */}
             <div
               className="absolute top-[-57%] right-[18%] cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               onClick={() => handleDeleteRows(index)}
