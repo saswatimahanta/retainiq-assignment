@@ -151,7 +151,7 @@ export default function Home() {
           <thead>
             <tr className="">
               {rowHeaders.map((header, index)=>(
-                <th className={index<2 ? 'sticky top-[0] left-[122px] z-2 bg-[#F0F0F2]': ''} key={index}>{header}</th>
+                <th className={index==0 ? 'sticky top-[0] left-[2px] pl-[9rem] z-2 bg-[#F0F0F2]': ''} key={index}>{header}</th>
               ))}
             </tr>
           </thead>

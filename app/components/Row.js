@@ -86,59 +86,58 @@ const Row = ({
   return (
     <tr ref={ref} className="h-[13rem] cursor-move group" onClick={() => setParentIndex(index)}>
       <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
-        <div className="relative">
-          {/* Delete button controlled by row hover */}
-          <div
-            className="absolute top-[-57%] right-[18%] cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            onClick={() => handleDeleteRows(index)}
-          >
-            <RiDeleteBinLine color="crimson" size={23} />
-          </div>
-          <div className="flex justify-center items-end">
-            <div className="text-3xl font-bold">{index + 1}</div>
-            <CgMenuGridO size={25} className="mb-1" />
-          </div>
-        </div>
-      </td>
-
-      <td className="sticky top-0 left-[6.7rem] bg-[#F0F0F2] z-20 px-8 border-r-2 border-[#E4E4E4]">
-        <div className="flex justify-center items-center gap-2 bg-white min-h-[9rem] w-[20rem] p-[2rem] border border-[#E4E4E4] rounded-md relative flex-wrap">
-          {row.tags ? row.tags.map((tag, index) => (
+        <div className='flex items-center gap-10'>
+          <div className="relative">
+            {/* Delete button controlled by row hover */}
             <div
-              key={index}
-              className={`border px-2 py-1 text-xs rounded-sm font-semibold ${
-                tag.status === "active"
-                  ? "text-green-600 bg-green-100 border-green-200"
-                  : "text-slate-500 bg-white border-[#E4E4E4]"
-              }`}
+              className="absolute top-[-57%] right-[18%] cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              onClick={() => handleDeleteRows(index)}
             >
-              {tag.name}
+              <RiDeleteBinLine color="crimson" size={23} />
             </div>
-          )) : (
-            <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md cursor-pointer">
-              <IoMdAdd size={23} />
-              <p className="text-xs font-bold">Add Product filters</p>
+            <div className="flex justify-center items-end">
+              <div className="text-3xl font-bold">{index + 1}</div>
+              <CgMenuGridO size={25} className="mb-1" />
             </div>
-          )}
-          {row.tags && (
-            <div
-              className="absolute left-[-0.5rem] justify-center items-center gap-2 bg-white h-[6rem] min-w-[21rem] p-[2rem] border border-[#E4E4E4] 
-              rounded-md opacity-0 hover:opacity-100 transition-opacity flex shadow-md"
-            >
-              {row.tags.map((tag, index) => (
-                <div
-                  key={index}
-                  className={`border px-2 py-1 text-xs rounded-sm font-semibold ${
-                    tag.status === "active"
-                      ? "text-green-600 bg-green-100 border-green-200"
-                      : "text-slate-500 bg-white border-[#E4E4E4]"
-                  }`}
-                >
-                  {tag.name}
-                </div>
-              ))}
-            </div>
-          )}
+          </div>
+          <div className="flex justify-center items-center gap-2 bg-white min-h-[9rem] w-[20rem] p-[2rem] border border-[#E4E4E4] rounded-md relative flex-wrap">
+            {row.tags ? row.tags.map((tag, index) => (
+              <div
+                key={index}
+                className={`border px-2 py-1 text-xs rounded-sm font-semibold ${
+                  tag.status === "active"
+                    ? "text-green-600 bg-green-100 border-green-200"
+                    : "text-slate-500 bg-white border-[#E4E4E4]"
+                }`}
+              >
+                {tag.name}
+              </div>
+            )) : (
+              <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md cursor-pointer">
+                <IoMdAdd size={23} />
+                <p className="text-xs font-bold">Add Product filters</p>
+              </div>
+            )}
+            {row.tags && (
+              <div
+                className="absolute left-[-0.5rem] justify-center items-center gap-2 bg-white h-[6rem] min-w-[21rem] p-[2rem] border border-[#E4E4E4] 
+                rounded-md opacity-0 hover:opacity-100 transition-opacity flex shadow-md"
+              >
+                {row.tags.map((tag, index) => (
+                  <div
+                    key={index}
+                    className={`border px-2 py-1 text-xs rounded-sm font-semibold ${
+                      tag.status === "active"
+                        ? "text-green-600 bg-green-100 border-green-200"
+                        : "text-slate-500 bg-white border-[#E4E4E4]"
+                    }`}
+                  >
+                    {tag.name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </td>
 
