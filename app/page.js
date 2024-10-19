@@ -20,9 +20,17 @@ export default function Home() {
   const initialRowHeaders = JSON.parse(window.localStorage.getItem("data")).rowHeaders;
   const [rows, setRows] = useState(initialRowData || []);
   const [rowHeaders, setRowHeaders] = useState(initialRowHeaders || [])
+
+  //toggles the modal for design insertion
   const [designModal, setDesignModal] = useState(false);
+
+  //holds the row in which insertion is needed
   const [parentIndex, setParentIndex] = useState(null);
+
+  //holds the selected design
   const [design, setDesign] = useState({});
+
+  //holds the cell where insertion is needed
   const [variantIndex, setVariantIndex] = useState(null);
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -54,35 +62,20 @@ export default function Home() {
     ...prevRowHeaders,
     `Variant ${prevRowHeaders.length - 2}`,
   ])
-  console.log(rowHeaders);
   }
 
   const handleAddRows = () => {
-    if(rows.length){
-      setRows(prevRows => [
-        ...prevRows,
-        {
-          id: prevRows.length+1,
-          //new product filters can be added here for new rows
-          variants: prevRows[0].variants.map((variant)=>({
-            design: "Add Design",
-          }))
-        }
+    setRows(prevRows => [
+      ...prevRows,
+      {
+        id: prevRows.length+1,
+        //new product filters can be added here for new rows
+        variants: rowHeaders.slice(2).map((variant)=>({
+          design: "Add Design",
+        }))
+      }
 
-      ])
-    }else {
-      setRows(prevRows => [
-        ...prevRows,
-        {
-          id: prevRows.length+1,
-          //new product filters can be added here for new rows
-          variants: rowHeaders.slice(2).map((variant)=>({
-            design: "Add Design",
-          }))
-        }
-
-      ])
-    }
+    ])
   }
 
   const handleDeleteRows= (index) => {

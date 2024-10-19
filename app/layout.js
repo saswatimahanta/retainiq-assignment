@@ -25,11 +25,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100vh]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100%] w-[100%] min-h-[100vh]`}
       >
-        <div className="h-[5rem] w-[99.1vw] bg-black ">
+        <div className="h-[5rem] w-[100%] bg-black ">
         </div>
-        <div className="flex">
+        <div className="flex h-[calc(100%-5rem)] min-h-[calc(100vh-5rem)]">
           <div className="w-[5rem] pt-[3rem] bg-black flex flex-col justify-start items-center gap-10">
             <FaFan size={30} color="green"/>
             <IoImageOutline size={30} color="white"/>

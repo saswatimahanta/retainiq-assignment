@@ -10,6 +10,7 @@ const initialHeaderRows = ["", "Product Filter", "Primary Variant", "Variant 1"]
 const initialRowData = [
   {
     id: 1,
+    //Add more tags here - same for every row
     tags: [
       {
         name: "tag1",
@@ -26,12 +27,12 @@ const initialRowData = [
     ],
     variants: [
       {
-        name: "pink",
-        url: pink,
+        name: "pink kurti",
+        url: image12,
       },
       {
-        name: "pink",
-        url: pink,
+        name: "dark yellow kurti",
+        url: image21,
       },
     ]
   },
@@ -48,17 +49,17 @@ const initialRowData = [
       },
       {
         name: "tag1",
-        status: "active",
+        status: "inactive",
       }
     ],
     variants: [
       {
-        name: "pink",
-        url: pink,
+        name: "white-pink kurti",
+        url: image31,
       },
       {
-        name: "pink",
-        url: pink,
+        name: "maroon kurti",
+        url: image11,
       },
     ]
   },
@@ -67,7 +68,7 @@ const initialRowData = [
     tags: [
       {
         name: "tag1",
-        status: "active",
+        status: "inactive",
       },
       {
         name: "tag1",
@@ -80,12 +81,12 @@ const initialRowData = [
     ],
     variants: [
       {
-        name: "pink",
-        url: pink,
+        name: "dark yellow kurti",
+        url: image21,
       },
       {
-        name: "pink",
-        url: pink,
+        name: "light yellow kurti",
+        url: image22,
       },
     ]
   },
@@ -94,11 +95,11 @@ const initialRowData = [
     tags: [
       {
         name: "tag1",
-        status: "active",
+        status: "inactive",
       },
       {
         name: "tag1",
-        status: "active",
+        status: "inactive",
       },
       {
         name: "tag1",
@@ -107,12 +108,12 @@ const initialRowData = [
     ],
     variants: [
       {
-        name: "pink",
-        url: pink,
+        name: "maroon kurti",
+        url: image11,
       },
       {
-        name: "pink",
-        url: pink,
+        name: "pink kurti",
+        url: image12,
       },
     ]
   },
