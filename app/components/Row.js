@@ -128,10 +128,10 @@ const Row = ({
                         </div>
                     </div>
                     : 
-                    <div className="relative z-2 bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
+                    <div className="group relative z-2 bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
                         <Image src={variant.url} alt="image" height={100}/>
                         <i className="text-xs">{variant.name}</i>
-                        <div className="absolute z-3 top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer"
+                        <div className="absolute z-3 top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer hidden group-hover:block"
                           onClick={()=>handleDesignModal(index)}
                         >
                             <FiEdit/>

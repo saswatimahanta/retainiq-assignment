@@ -24,18 +24,19 @@ const DesignModal = ({
         </div>
         <div className="grid grid-cols-4 gap-y-4 p-10 h-[calc(100%-12rem)] overflow-y-scroll ">
           {designs.map((design, index)=>(
-            <div className="relative" key={index}>
-              <Image className="rounded-md" src={design.url} height={200} alt="design"/>
-              <div className="text-sm font-semibold">{design.name}</div>
-              <div className="absolute top-[36%] left-[34%] bg-white px-4 py-2 rounded-md cursor-pointer font-semibold"
-                onClick={()=>{
-                    setDesignModal(false);
-                    setDesign(design);
-                  }}
-              >
-                Insert
-              </div>
+            <div className="relative group" key={index}>
+            <Image className="rounded-md" src={design.url} height={200} alt="design" />
+            <div className="text-sm font-semibold">{design.name}</div>
+            <div
+              className="absolute top-[36%] left-[34%] bg-white px-4 py-2 rounded-md cursor-pointer font-semibold hidden group-hover:block"
+              onClick={() => {
+                setDesignModal(false);
+                setDesign(design);
+              }}
+            >
+              Insert
             </div>
+          </div>
           ))}
         </div>
       </div>
