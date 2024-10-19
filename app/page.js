@@ -205,6 +205,9 @@ export default function Home() {
   const [rows, setRows] = useState(initialRowData || []);
   const [rowHeaders, setRowHeaders] = useState(initialRowHeaders || [])
   const [designModal, setDesignModal] = useState(false);
+  const [parentIndex, setParentIndex] = useState(null);
+  const [design, setDesign] = useState({});
+  const [variantIndex, setVariantIndex] = useState(null);
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setRows((prevRows) =>
@@ -230,6 +233,12 @@ export default function Home() {
       ],
     }))
   );
+
+  setRowHeaders((prevRowHeaders) => [
+    ...prevRowHeaders,
+    `Variant ${prevRowHeaders.length - 2}`,
+  ])
+  console.log(rowHeaders);
   }
 
   const handleAddRows = () => {
@@ -272,6 +281,31 @@ export default function Home() {
     window.localStorage.setItem("data", JSON.stringify(newData));
   }, [rows, rowHeaders])
 
+  useEffect(()=>{
+    if(Object.keys(design).length>0 && parentIndex!=null && variantIndex!=null){
+      console.log(parentIndex);
+      console.log(design);
+      console.log(variantIndex);
+
+      setRows((prevRows)=> prevRows.map((row, index)=>{
+        if(index == parentIndex){
+          return {
+            ...row,
+            variants: row.variants.map((variant, index)=>{
+              if(index == variantIndex){
+                return design;
+              }else return variant;
+            })
+          }
+        }else return row;
+      }));
+
+      //if you do not empty design then when changing any design for the second time will update the previous selected design on just click and you cannot choose
+      setDesign({});
+
+    }
+  }, [parentIndex, design, variantIndex])
+
   const renderCard = useCallback((row, index)=>{
     return(
       <Row
@@ -309,6 +343,9 @@ export default function Home() {
                 handleAddColumns={handleAddColumns}
                 handleDeleteRows={handleDeleteRows}
                 setDesignModal={setDesignModal}
+                parentIndex={index}
+                setParentIndex={setParentIndex}
+                setVariantIndex={setVariantIndex}
               />
             ))}
           </tbody>
@@ -324,6 +361,7 @@ export default function Home() {
     {designModal && <DesignModal
       designs={designs}
       setDesignModal={setDesignModal}
+      setDesign={setDesign}
     />}
 
     <div className="m-[10rem]">Use different SKUs</div>

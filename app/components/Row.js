@@ -15,6 +15,9 @@ const Row = ({
     handleAddColumns,
     handleDeleteRows,
     setDesignModal,
+    parentIndex,
+    setParentIndex,
+    setVariantIndex,
 }) => {
     const ref = useRef(null)
     const [{ handlerId }, drop] = useDrop({
@@ -75,13 +78,13 @@ const Row = ({
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
 
-    const handleDesignModal = () => {
+    const handleDesignModal = (index) => {
       setDesignModal(true);
-      console.log("hey")
+      setVariantIndex(index);
     }
 
   return (
-    <tr ref={ref} className="h-[13rem] cursor-move">
+    <tr ref={ref} className="h-[13rem] cursor-move" onClick={()=>setParentIndex(index)}>
         <td className="sticky top-0 left-0 z-20 px-8 border-r-2 border-[#E4E4E4] bg-[#F0F0F2]">
           <div className="relative">
             <div className="absolute top-[-57%] right-[18%] cursor-pointer"
@@ -113,7 +116,7 @@ const Row = ({
                 {variant.design? 
                     <div className="bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex justify-center items-center cursor-pointer">
                         <div className="flex items-center border border-[#E4E4E4] p-2 rounded-md" 
-                          onClick={handleDesignModal}
+                          onClick={()=>handleDesignModal(index)}
                         >
                             <IoMdAdd size={23}/>
                             <p className="text-xs font-bold">{variant.design}</p>
@@ -123,7 +126,9 @@ const Row = ({
                     <div className="relative z-2 bg-white border border-[#E4E4E4] h-[9rem] w-[9rem] rounded-md flex flex-col justify-center items-center">
                         <Image src={variant.url} alt="image" height={100}/>
                         <i className="text-xs">{variant.name}</i>
-                        <div className="absolute z-3 top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer">
+                        <div className="absolute z-3 top-[32%] left-[40%] bg-white p-2 rounded-md cursor-pointer"
+                          onClick={()=>handleDesignModal(index)}
+                        >
                             <FiEdit/>
                         </div>
                     </div>

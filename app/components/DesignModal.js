@@ -6,13 +6,14 @@ import Image from 'next/image';
 const DesignModal = ({
     designs,
     setDesignModal,
+    setDesign,
 }) => {
   return (
     <div className="fixed h-[100vh] w-[100vw] top-[0] right-[0] z-30 bg-[#00000099] flex justify-center items-center"
     onClick={()=>setDesignModal(false)}
     >
       <div className="h-[45rem] w-[58rem] bg-white opacity-100 rounded-md "
-        
+        onClick={(e)=>{e.stopPropagation()}}
       >
         <div className="w-[100%] h-[12rem] border-b-2 flex flex-col p-8 justify-between">
           <div><IoImageOutline color="green" size={50}/></div>
@@ -27,7 +28,10 @@ const DesignModal = ({
               <Image className="rounded-md" src={design.url} height={200} alt="design"/>
               <div className="text-sm font-semibold">{design.name}</div>
               <div className="absolute top-[36%] left-[34%] bg-white px-4 py-2 rounded-md cursor-pointer font-semibold"
-                
+                onClick={()=>{
+                    setDesignModal(false);
+                    setDesign(design);
+                  }}
               >
                 Insert
               </div>
